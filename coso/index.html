@@ -62,7 +62,7 @@
         .title {
             font-size: 56px;
             font-weight: bold;
-            padding: 0 40px 80px 40px;
+            padding: 0 50px 80px 50px;
             text-align: left;
             line-height: 1.2;
             /*text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);*/
@@ -154,9 +154,9 @@
 <textarea id="title-input" class="form-control" placeholder="Escriba el título aquí"></textarea>
 <!--<button id="highlight-btn" class="btn btn-secondary">Resaltar Sección</button>-->
 <select id="corner-image-select" class="form-control">
-<option value="https://i.imgur.com/F3rItm4.png" data-text="Noticias Celeste">Noticias Celeste</option>
-<option value="https://i.imgur.com/4guSzZs.png" data-text="Noticias Blanco">Noticias Blanco</option>
-<option value="https://i.imgur.com/oh8KksF.png" data-text="Noticias Azul Oscuro">Noticias Azul Oscuro</option>
+<option value="https://i.imgur.com/F3rItm4.png" data-color="#ffffff" data-text="Noticias Celeste">Noticias Celeste</option>
+<option value="https://i.imgur.com/4guSzZs.png" data-color="#22223c" data-text="Noticias Blanco">Noticias Blanco</option>
+<option value="https://i.imgur.com/oh8KksF.png" data-color="#ffffff" data-text="Noticias Azul Oscuro">Noticias Azul Oscuro</option>
 </select>
 </div>
 <div class="zoom-container">
@@ -200,14 +200,9 @@
             $("#title-input").val(title);
             $("#title-text").html(title);
             
-            const selectedOption = $("#section-select").find("option:selected");
+            const selectedOption = $("#corner-image-select").find("option:selected");
             const sectionColor = selectedOption.data("color");
-            const textShadowColor = selectedOption.data("textshadow") || sectionColor;
-            $(".section").css("text-shadow", `
-                -1px -1px 0 ${textShadowColor}, 1px -1px 0 ${textShadowColor}, 
-                -1px 1px 0 ${textShadowColor}, 1px 1px 0 ${textShadowColor}
-            `);
-            $(".line").css("background-color", sectionColor);
+            $(".title").css("color", sectionColor);
             updateHighlights(sectionColor);
         }
 
