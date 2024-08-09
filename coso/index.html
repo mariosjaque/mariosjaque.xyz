@@ -24,7 +24,6 @@
 	@font-face {font-family: 'Plus Jakarta Sans';font-style: normal;font-weight: 400;src: url(https://fonts.gstatic.com/s/plusjakartasans/v2/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU79TR_V.woff2) format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
         body {
-            font-family: 'Hauora Sans', sans-serif;
             background-color: #92ebdf;
             padding: 20px;
         }
@@ -219,7 +218,7 @@
 		const selectedOption2 = $("#fuente-select").find("option:selected");
             const fuente = selectedOption2.val();
             $(".overlay").css("color", sectionColor);
-	$("body").css("font-family", fuente);
+		$(".overlay").css("font-family", fuente);
             updateHighlights(sectionColor);
         }
 
@@ -313,9 +312,9 @@
             });
 
 	$("#fuente-select").on("change", function() {
-               	const selectedOption2 = $(this).find("option:selected");
-            	const fuente = selectedOption2.val();
-		$("body").css("font-family", fuente);
+               	const selectedOption = $(this).find("option:selected");
+            	const fuente = selectedOption.val();
+		$(".overlay").css("font-family", fuente);
             });
 
             $("#zoom-slider").on("input", function() {
