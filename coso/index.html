@@ -74,6 +74,11 @@
             padding: 0 50px 80px 50px;
             text-align: left;
             line-height: 1.2;
+	    overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
             /*text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);*/
         }
         .editable {
@@ -186,7 +191,7 @@
 <div class="section editable" id="section-text" contenteditable="true" style="text-shadow: rgb(26, 79, 155) -1px -1px 0px, rgb(26, 79, 155) 1px -1px 0px, rgb(26, 79, 155) -1px 1px 0px, rgb(26, 79, 155) 1px 1px 0px;">ANIME</div>
 <div class="line" style="background-color: rgb(26, 79, 155);"></div>
 </div>-->
-<div class="title editable" id="title-text" contenteditable="true">blurb</div>
+<div class="title editable" id="title-text" contenteditable="true">blurb<br>blurb<br>blurb</div>
 </div>
 </div>
 </div>
@@ -206,7 +211,7 @@
         function setInitialValues() {
             const params = getQueryParams();
             //const section = params.section || "Test";
-            const title = params.title || "blurb";
+            const title = params.title || "blurb<br>blurb<br>blurb";
             
             //$("#section-select").val(section);
             //$("#section-text").text(section);
