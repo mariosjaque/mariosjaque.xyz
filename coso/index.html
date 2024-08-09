@@ -13,6 +13,16 @@
             font-weight: 600;
             src: url(https://cdn.jsdelivr.net/fontsource/fonts/hauora-sans@latest/latin-600-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/hauora-sans@latest/latin-600-normal.woff) format('woff');
         }
+	/* Fuente Plus Jakarta Sans */
+	/* cyrillic-ext */
+	@font-face {font-family: 'Plus Jakarta Sans';font-style: normal;font-weight: 400;src: url(https://fonts.gstatic.com/s/plusjakartasans/v2/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU79QB_VIKg.woff2) format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+	/* vietnamese */
+	@font-face {font-family: 'Plus Jakarta Sans';font-style: normal;font-weight: 400;src: url(https://fonts.gstatic.com/s/plusjakartasans/v2/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU79Qh_VIKg.woff2) format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB}
+	/* latin-ext */
+	@font-face {font-family: 'Plus Jakarta Sans';font-style: normal;font-weight: 400;src: url(https://fonts.gstatic.com/s/plusjakartasans/v2/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU79Qx_VIKg.woff2) format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}
+	/* latin */
+	@font-face {font-family: 'Plus Jakarta Sans';font-style: normal;font-weight: 400;src: url(https://fonts.gstatic.com/s/plusjakartasans/v2/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU79TR_V.woff2) format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+
         body {
             font-family: 'Hauora Sans', sans-serif;
             background-color: #92ebdf;
@@ -129,7 +139,7 @@
                 margin-bottom: 10px;
             }
         }
-        #corner-image {
+        #seccion {
             position: absolute;
             width: 100%;
             opacity: 1;
@@ -153,7 +163,11 @@
 </select>-->
 <textarea id="title-input" class="form-control" placeholder="Escriba el título aquí"></textarea>
 <!--<button id="highlight-btn" class="btn btn-secondary">Resaltar Sección</button>-->
-<select id="corner-image-select" class="form-control">
+<select id="fuente-select" class="form-control">
+<option value="'Hauora Sans', sans-serif" data-text="Hauora Sans">Hauora Sans</option>
+<option value="'Plus Jakarta Sans', sans-serif" data-text="Plus Jakarta Sans">Plus Jakarta Sans</option>
+</select>
+<select id="seccion-select" class="form-control">
 <option value="https://i.imgur.com/F3rItm4.png" data-color="#ffffff" data-text="Noticias Celeste">Noticias Celeste</option>
 <option value="https://i.imgur.com/4guSzZs.png" data-color="#22223c" data-text="Noticias Blanco">Noticias Blanco</option>
 <option value="https://i.imgur.com/oh8KksF.png" data-color="#ffffff" data-text="Noticias Azul Oscuro">Noticias Azul Oscuro</option>
@@ -166,7 +180,7 @@
 <div id="image-warning" style="display: none;">La imagen debe tener al menos 1024px de ancho y alto.</div>
 <div class="image-container" id="capture">
 <img id="background-image" src="https://i.imgur.com/CPSumKt.png" alt="Image" style="width: auto; height: 100%; top: 0px; left: 0px;" data-scale="2.96" data-x="0" data-y="0">
-<img id="corner-image" src="https://i.imgur.com/F3rItm4.png" alt="Template">
+<img id="seccion" src="https://i.imgur.com/F3rItm4.png" alt="Template">
 <div class="overlay">
 <!--<div class="section-container">
 <div class="line" style="background-color: rgb(26, 79, 155);"></div>
@@ -192,17 +206,20 @@
 
         function setInitialValues() {
             const params = getQueryParams();
-            const section = params.section || "Test";
+            //const section = params.section || "Test";
             const title = params.title || "blurb";
             
-            $("#section-select").val(section);
+            //$("#section-select").val(section);
             //$("#section-text").text(section);
             $("#title-input").val(title);
             $("#title-text").html(title);
             
-            const selectedOption = $("#corner-image-select").find("option:selected");
+            const selectedOption = $("#seccion-select").find("option:selected");
             const sectionColor = selectedOption.data("color");
+		const selectedOption2 = $("#fuente-select").find("option:selected");
+            const fuente = selectedOption2.val();
             $(".overlay").css("color", sectionColor);
+	$("body").css("font-family", fuente);
             updateHighlights(sectionColor);
         }
 
@@ -210,7 +227,7 @@
             $("#title-input").val($("#title-text").html());
         }
 
-        function updateHighlights(newColor) {
+        /*function updateHighlights(newColor) {
             $("#title-text span[style*='color']").each(function() {
                 $(this).css("color", newColor);
             });
@@ -224,7 +241,7 @@
             const highlightedText = text.slice(0, start) + '<span style="color:' + color + ';">' + text.slice(start, end) + '</span>' + text.slice(end);
             textarea.value = highlightedText;
             $("#title-text").html(highlightedText);
-        }
+        }*/
 
         $(document).ready(function() {
             setInitialValues();
@@ -264,7 +281,7 @@
                 }
             });
 
-            $("#section-select").on("change", function() {
+            /*$("#section-select").on("change", function() {
                 const selectedOption = $(this).find("option:selected");
                 const sectionText = selectedOption.val();
                 const sectionColor = selectedOption.data("color");
@@ -283,16 +300,22 @@
                 const highlightColor = selectedOption.data("color");
                 const textarea = document.getElementById("title-input");
                 highlightSelection(textarea, highlightColor);
-            });
+            });*/
 
-            $("#corner-image-select").on("change", function() {
+            $("#seccion-select").on("change", function() {
                 const selectedOption = $(this).find("option:selected");
                 const imageUrl = selectedOption.val();
 		const sectionColor = selectedOption.data("color");
                 const text = selectedOption.data("text");
-                $("#corner-image").attr("src", imageUrl);
+                $("#seccion").attr("src", imageUrl);
 		$(".overlay").css("color", sectionColor);
-                $("#corner-image-text").text(text);
+                $("#seccion-text").text(text);
+            });
+
+	$("#fuente-select").on("change", function() {
+               	const selectedOption2 = $(this).find("option:selected");
+            	const fuente = selectedOption2.val();
+		$("body").css("font-family", fuente);
             });
 
             $("#zoom-slider").on("input", function() {
