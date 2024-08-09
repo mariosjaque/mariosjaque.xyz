@@ -288,8 +288,10 @@
             $("#corner-image-select").on("change", function() {
                 const selectedOption = $(this).find("option:selected");
                 const imageUrl = selectedOption.val();
+		const sectionColor = selectedOption.data("color");
                 const text = selectedOption.data("text");
                 $("#corner-image").attr("src", imageUrl);
+		$(".overlay").css("color", sectionColor);
                 $("#corner-image-text").text(text);
             });
 
