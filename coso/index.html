@@ -226,7 +226,7 @@
             $("#title-input").val($("#title-text").html());
         }
 
-        /*function updateHighlights(newColor) {
+        function updateHighlights(newColor) {
             $("#title-text span[style*='color']").each(function() {
                 $(this).css("color", newColor);
             });
@@ -240,7 +240,7 @@
             const highlightedText = text.slice(0, start) + '<span style="color:' + color + ';">' + text.slice(start, end) + '</span>' + text.slice(end);
             textarea.value = highlightedText;
             $("#title-text").html(highlightedText);
-        }*/
+        }
 
         $(document).ready(function() {
             setInitialValues();
@@ -280,7 +280,7 @@
                 }
             });
 
-            /*$("#section-select").on("change", function() {
+            $("#section-select").on("change", function() {
                 const selectedOption = $(this).find("option:selected");
                 const sectionText = selectedOption.val();
                 const sectionColor = selectedOption.data("color");
@@ -299,7 +299,7 @@
                 const highlightColor = selectedOption.data("color");
                 const textarea = document.getElementById("title-input");
                 highlightSelection(textarea, highlightColor);
-            });*/
+            });
 
             $("#seccion-select").on("change", function() {
                 const selectedOption = $(this).find("option:selected");
