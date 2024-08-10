@@ -71,7 +71,7 @@
         .title {
             font-size: 56px;
             font-weight: bold;
-	    font-feature-settings: "liga" 0;
+	    font-variant-ligatures: none;
             padding: 0 50px 80px 50px;
             text-align: justify;
             line-height: 1.2;
@@ -336,7 +336,9 @@
             });
 
             $("#download-btn").on("click", function() {
-                html2canvas(document.querySelector("#capture"), {
+		var el = document.querySelector("#capture");
+		el.style.fontFeatureSettings = '"liga" 0';
+                html2canvas(el, {
                     useCORS: true,
                     scale: 1 // a
                 }).then(canvas => {
